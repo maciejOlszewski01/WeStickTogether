@@ -18,7 +18,7 @@ public class Interactor : MonoBehaviour
     private readonly Collider[] _coliders = new Collider[3];
     private GameObject[] objectsToSwap = new GameObject[2];
     private int _numFound;
-    private Note ActiveCanvas = null;
+    public Note ActiveCanvas = null;
     private int objectsReadytoSwap;
     private Interactable interactable;
 
@@ -47,6 +47,7 @@ public class Interactor : MonoBehaviour
                 {
                     if (!interactionPrompt.IsDisplayed) interactionPrompt.SetUp(interactable.InteractionPrompt);
                 }
+
                 if (_coliders[0].GetComponent<MovableHeavy>() != null)
                 {
                     if (Keyboard.current.eKey.isPressed)
@@ -65,16 +66,17 @@ public class Interactor : MonoBehaviour
                         objectsToSwap[objectsReadytoSwap] = _coliders[0].gameObject;
                         objectsReadytoSwap++;
                     }
-                }
-                else if (Keyboard.current.eKey.wasPressedThisFrame)
-                {
-                    //do przeobienia chyba
-                    if (_coliders[0].GetComponent<Note>() != null)
+                    else if (Keyboard.current.eKey.wasPressedThisFrame)
                     {
-                        //Debug.Log("Widze obiekty");
-                        ActiveCanvas = _coliders[0].gameObject.GetComponent<Note>();
+                        //do przeobienia chyba
+                        if (_coliders[0].GetComponent<Note>() != null)
+                        {
+                            //Debug.Log("Widze obiekty");
+                            ActiveCanvas = _coliders[0].gameObject.GetComponent<Note>();
+                        }
                     }
                 }
+
 
             }
             else
