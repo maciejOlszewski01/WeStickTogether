@@ -9,7 +9,10 @@ public class RightOrderMystery : MonoBehaviour
 
     [SerializeField] List<GameObject> RightOrder = new List<GameObject>();
     [SerializeField] List<GameObject> ActualOrder = new List<GameObject>();
+    [SerializeField] Lock locki;
     public bool change;
+    public bool rightOrder;
+    public int tak;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +22,12 @@ public class RightOrderMystery : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        changeOrder();
         if (change)
         {
-
+            
             if (checkOrder())
-             
+             locki.unlocked = true;
 
             change = false;
         }
@@ -34,7 +38,7 @@ public class RightOrderMystery : MonoBehaviour
     public bool checkOrder()
     {
         bool IsInRightOrder = true;
-
+        
         for (int i = 0; i < RightOrder.Count; i++)
         {
             if (RightOrder[i].GetInstanceID() != ActualOrder[i].GetInstanceID())
@@ -44,14 +48,28 @@ public class RightOrderMystery : MonoBehaviour
     }
 
     //To mo¿e lagowaæ mocno
-    public void changeOrder(GameObject object1 ,GameObject object2)
+    public void changeOrder()
     {
-        int index1 = ActualOrder.FindIndex(x => x.GetInstanceID() == object1.GetInstanceID());
-        int index2 = ActualOrder.FindIndex(x => x.GetInstanceID() == object2.GetInstanceID());
-        ActualOrder[index1] = object2;
-        ActualOrder[index2] = object1;
-        change = true;
-
+        List<GameObject> Changed = new List<GameObject>();
+        foreach (GameObject go in ActualOrder)
+        {
+            if (go.GetComponent<Swapable>().zmieniam)
+            {
+                Changed.Add(go);
+            }
+        }
+        
+        if (Changed.Count == 2)
+        {
+            int index1 = ActualOrder.FindIndex(x => x.GetInstanceID() == Changed[0].GetInstanceID());
+            int index2 = ActualOrder.FindIndex(x => x.GetInstanceID() == Changed[1].GetInstanceID());
+            ActualOrder[index1] = Changed[1];
+            ActualOrder[index2] = Changed[0];
+            Changed[0].GetComponent<Swapable>().zmieniam = false;
+            Changed[1].GetComponent<Swapable>().zmieniam = false;
+            change = true;
+            Changed.Clear();
+        }
     }
 
 

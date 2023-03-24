@@ -7,11 +7,12 @@ public class Swapable : MonoBehaviour, Interactable
     [SerializeField] private string _prompt;
     [SerializeField] private GameObject waypoint;
 
+    public bool zmieniam;
     public int state;
     public float x, y, z;
     public Vector3 position;
     public Vector3 position2;
-    public Vector3 position3;
+
     public string InteractionPrompt => _prompt;
 
     void Start()
@@ -21,9 +22,11 @@ public class Swapable : MonoBehaviour, Interactable
         y = GetComponent<Transform>().position.y;
         z = GetComponent<Transform>().position.z;
         position = new Vector3(x, y, z);
+        zmieniam = false;
     }
     public bool Interact(Interactor interactor)
     {
+        zmieniam = true;
         return true;
     }
 }

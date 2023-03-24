@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class Interactor : MonoBehaviour
@@ -12,14 +11,14 @@ public class Interactor : MonoBehaviour
     [SerializeField] private float _interactionPointRadius;
     [SerializeField] private LayerMask _interactableMask;
     [SerializeField] private GUIFaceCamera interactionPrompt;
-    [SerializeField] private RightOrderMystery mystery;
+    
 
     //czy ma klucz
     public bool hasKey;
     private readonly Collider[] _coliders = new Collider[3];
     private GameObject[] objectsToSwap = new GameObject[2];
-    private Note ActiveCanvas = null;
     private int _numFound;
+    private Note ActiveCanvas = null;
     private int objectsReadytoSwap;
     private Interactable interactable;
 
@@ -36,7 +35,7 @@ public class Interactor : MonoBehaviour
         if (ActiveCanvas == null)
         {
             if (Keyboard.current.qKey.IsPressed())
-                _numFound = Physics.OverlapCapsuleNonAlloc(_interactionPoint.position, _interactionPoint2.position, 0.03f, _coliders, _interactableMask);
+                _numFound = Physics.OverlapCapsuleNonAlloc(_interactionPoint.position, _interactionPoint2.position, 0.01f, _coliders, _interactableMask);
             else
                 _numFound = Physics.OverlapCapsuleNonAlloc(_interactionPoint.position, _interactionPoint2.position, _interactionPointRadius, _coliders, _interactableMask);
             if (_numFound > 0)
@@ -48,9 +47,6 @@ public class Interactor : MonoBehaviour
                 {
                     if (!interactionPrompt.IsDisplayed) interactionPrompt.SetUp(interactable.InteractionPrompt);
                 }
-
-
-
                 if (_coliders[0].GetComponent<MovableHeavy>() != null)
                 {
                     if (Keyboard.current.eKey.isPressed)
@@ -69,14 +65,14 @@ public class Interactor : MonoBehaviour
                         objectsToSwap[objectsReadytoSwap] = _coliders[0].gameObject;
                         objectsReadytoSwap++;
                     }
-                    else if (Keyboard.current.eKey.wasPressedThisFrame)
+                }
+                else if (Keyboard.current.eKey.wasPressedThisFrame)
+                {
+                    //do przeobienia chyba
+                    if (_coliders[0].GetComponent<Note>() != null)
                     {
-                        //do przeobienia chyba
-                        if (_coliders[0].GetComponent<Note>() != null)
-                        {
-                            //Debug.Log("Widze obiekty");
-                            ActiveCanvas = _coliders[0].gameObject.GetComponent<Note>();
-                        }
+                        //Debug.Log("Widze obiekty");
+                        ActiveCanvas = _coliders[0].gameObject.GetComponent<Note>();
                     }
                 }
 
@@ -95,7 +91,7 @@ public class Interactor : MonoBehaviour
                 if (zrobione == true)
 
                 {
-                    mystery.changeOrder(objectsToSwap[0], objectsToSwap[1]);
+
                     objectsToSwap[0] = null;
                     objectsToSwap[1] = null;
                     objectsReadytoSwap = 0;
@@ -109,7 +105,7 @@ public class Interactor : MonoBehaviour
             if (Keyboard.current.eKey.wasPressedThisFrame)
             {
                 ActiveCanvas.Interact(this);
-                ActiveCanvas= null;
+                ActiveCanvas = null;
             }
         }
     }
@@ -194,4 +190,5 @@ public class Interactor : MonoBehaviour
         }
         return false;
     }
+
 }
