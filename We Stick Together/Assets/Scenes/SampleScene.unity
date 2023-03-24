@@ -6367,7 +6367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1392525714
 Transform:
   m_ObjectHideFlags: 0
@@ -7700,6 +7700,7 @@ GameObject:
   - component: {fileID: 1728661314}
   - component: {fileID: 1728661313}
   - component: {fileID: 1728661312}
+  - component: {fileID: 1728661315}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -7788,6 +7789,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1728661315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728661311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8625f847c4a7444fad717616d6d6fe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1734791442 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c1e0026fc1722a14faaf857a3c673b44, type: 3}
@@ -9015,6 +9028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostButton: {fileID: 2074224332}
   clientButton: {fileID: 2034379625}
+  gameStartScreen: 0
 --- !u!1 &2030786341
 GameObject:
   m_ObjectHideFlags: 0
@@ -9027,7 +9041,8 @@ GameObject:
   - component: {fileID: 2030786345}
   - component: {fileID: 2030786344}
   - component: {fileID: 2030786343}
-  - component: {fileID: 2030786342}
+  - component: {fileID: 2030786347}
+  - component: {fileID: 2030786348}
   m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
@@ -9035,20 +9050,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2030786342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030786341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd7c0be6e3b4cbe4fbaf6c02f7a9cf48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prompt: czytaj
-  UI: {fileID: 2091875649}
 --- !u!64 &2030786343
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9129,6 +9130,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2030786347
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030786341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12, y: 2.220446e-16, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2030786348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030786341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7c0be6e3b4cbe4fbaf6c02f7a9cf48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prompt: 
+  UI: {fileID: 2091875649}
 --- !u!1 &2034379623
 GameObject:
   m_ObjectHideFlags: 0
