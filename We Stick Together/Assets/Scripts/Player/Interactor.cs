@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class Interactor : MonoBehaviour
+public class Interactor : NetworkBehaviour
 {
 
 
@@ -58,6 +59,8 @@ public class Interactor : MonoBehaviour
                 }
                 else if (Keyboard.current.eKey.wasPressedThisFrame)
                 {
+                    //interakcjaServerRpc(_coliders[0]);
+                    
                     interactable.Interact(this);
                     //do przeobienia chyba
                     if (_coliders[0].GetComponent<Swapable>() != null)
@@ -192,5 +195,16 @@ public class Interactor : MonoBehaviour
         }
         return false;
     }
-
+    /*
+    [ServerRpc(RequireOwnership = false)]
+    public void interakcjaServerRpc(Collider interactable)
+    {
+        interakcjaClientRpc(interactable);
+    }
+    [ClientRpc]
+    public void interakcjaClientRpc(Collider interactable)
+    {
+        interactable.GetComponent<Interactable>().Interact(this);
+    }
+    */
 }
