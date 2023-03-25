@@ -211,10 +211,10 @@ GameObject:
   - component: {fileID: 3474804304214363945}
   - component: {fileID: 3474804304214363942}
   - component: {fileID: 3474804304214363944}
-  - component: {fileID: 5666868657409506859}
   - component: {fileID: 6936306137820698400}
   - component: {fileID: 955533588810633670}
   - component: {fileID: 5112233011939944845}
+  - component: {fileID: 5239138887549225166}
   m_Layer: 0
   m_Name: FirstPersonController
   m_TagString: Untagged
@@ -273,32 +273,6 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &5666868657409506859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3474804304214363940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 1
 --- !u!114 &6936306137820698400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +347,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 3474804305102012690}
   HowClose: 20
+--- !u!114 &5239138887549225166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3474804304214363940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64753b2971bfd045916eff2b1785704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
 --- !u!1 &3474804305102012688
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 3474804305102012693}
   - component: {fileID: 3474804305102012690}
   - component: {fileID: 3474804305102012691}
+  - component: {fileID: 5765477565988858242}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -459,6 +460,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3474804305102012688}
   m_Enabled: 1
+--- !u!114 &5765477565988858242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3474804305102012688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc760f606ac2b244dbcdddc4a2e8dc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3568364477859291228
 GameObject:
   m_ObjectHideFlags: 0
