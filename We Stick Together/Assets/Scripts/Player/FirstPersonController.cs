@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class FirstPersonController : MonoBehaviour
+
+public class FirstPersonController : NetworkBehaviour
 {
     public bool CanMove { get; private set; } = true;
     private bool IsSprinting => canSprint && Input.GetKey(sprintKey);
@@ -64,16 +66,24 @@ public class FirstPersonController : MonoBehaviour
 
     void Awake()
     {
+
+            
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     void Update()
     {
-        if(CanMove)
+        if (!IsOwner)
+        {
+            Debug.Log("nie jestem wlascicielem");
+            return;
+        }
+        if (CanMove)
         {
             HandleMovementInput();
             HandleMouseLook();
