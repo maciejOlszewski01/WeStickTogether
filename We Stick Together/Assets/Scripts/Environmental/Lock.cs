@@ -15,14 +15,29 @@ public class Lock : NetworkBehaviour, Interactable
 
     public bool Interact(Interactor interactor)
     {
+        
+        
+
         if (interactor.hasKey == true)
         {
-            unlocked = true;
+            LockInteractionServerRpc();
         }
         return true;
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void LockInteractionServerRpc()
+    {
+        LockInteractionClientRpc();
 
+    }
+    [ClientRpc]
+    public void LockInteractionClientRpc()
+    {
 
-}
+            unlocked = true;
+        
+        //return true;
+    }
+    }
 
