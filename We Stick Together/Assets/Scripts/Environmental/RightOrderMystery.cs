@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 
-public class RightOrderMystery : MonoBehaviour
+public class RightOrderMystery : NetworkBehaviour
 {
 
     [SerializeField] List<GameObject> RightOrder = new List<GameObject>();
@@ -22,15 +23,17 @@ public class RightOrderMystery : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        changeOrder();
-        if (change)
-        {
-            
-            if (checkOrder())
-             locki.unlocked = true;
 
-            change = false;
-        }
+            changeOrder();
+            if (change)
+            {
+
+                if (checkOrder())
+                    locki.unlocked = true;
+
+                change = false;
+            }
+        
     }
 
 
@@ -71,6 +74,10 @@ public class RightOrderMystery : MonoBehaviour
             Changed.Clear();
         }
     }
+    [ClientRpc]
+    public void ZmienDaneClientRpc()
+    {
 
+    }
 
 }
