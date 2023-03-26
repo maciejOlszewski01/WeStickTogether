@@ -15,7 +15,7 @@ public class RightOrderMystery : NetworkBehaviour
     public bool rightOrder;
     public int tak;
     // Start is called before the first frame update
-    void Start()
+    public override void OnNetworkSpawn()
     {
         change = false;
     }
@@ -23,16 +23,10 @@ public class RightOrderMystery : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
-            changeOrder();
-            if (change)
-            {
-
-                if (checkOrder())
-                    locki.unlocked = true;
-
-                change = false;
-            }
+        if (IsServer)
+        {
+            ZmienDaneClientRpc();
+        }
         
     }
 
@@ -77,7 +71,15 @@ public class RightOrderMystery : NetworkBehaviour
     [ClientRpc]
     public void ZmienDaneClientRpc()
     {
+        changeOrder();
+        if (change)
+        {
 
+            if (checkOrder())
+                locki.unlocked = true;
+
+            change = false;
+        }
     }
 
 }

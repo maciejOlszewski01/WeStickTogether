@@ -63,6 +63,7 @@ public class Interactor : NetworkBehaviour
                     
                     interactable.Interact(this);
                     //do przeobienia chyba
+
                     if (_coliders[0].GetComponent<Swapable>() != null)
                     {
                         //Debug.Log("Widze obiekty");

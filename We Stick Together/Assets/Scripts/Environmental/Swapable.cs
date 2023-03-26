@@ -27,6 +27,8 @@ public class Swapable : NetworkBehaviour, Interactable
     }
     public bool Interact(Interactor interactor)
     {
+        SwapInteractionServerRpc();
+        return true;
         zmieniam = true;
         return true;
     }
