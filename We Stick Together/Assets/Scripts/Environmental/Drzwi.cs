@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 
-public class Drzwi : NetworkBehaviour, Interactable
+public class Drzwi : MonoBehaviour, Interactable
 {
     [SerializeField] private string _prompt;
     [SerializeField] private AudioSource audioDrzwi = null;
@@ -15,43 +14,37 @@ public class Drzwi : NetworkBehaviour, Interactable
     [SerializeField] BoxCollider m_Collider;
 
     // Use this for initialization
-    public override void OnNetworkSpawn()
+    void Start()
     {
-            Otwieranie = false;
-            Zamykanie = false;
-        
-
+        Otwieranie = animator.GetBool("Otwierane");
+        Zamykanie = animator.GetBool("Zamykane");
+      
     }
 
     public string InteractionPrompt => _prompt;
 
-
-    //Tutaj wydaje mi siê ¿e mo¿na zredukowaæ liczbê operacji i zmiennych do zoptymalizowania
+   //Tutaj wydaje mi siê ¿e mo¿na zredukowaæ liczbê operacji i zmiennych do zoptymalizowania
     public bool Interact(Interactor interactor)
     {
-        
-        DoorInteractionServerRpc();
-        return true;
-        
-        
-        if (lock1 == null || lock1.unlocked == true) {
-            if (Otwieranie == false) {
-                animator.SetBool("Otwierane", true);
-                animator.SetBool("Zamykane", false);
-                Otwieranie = true;
-                Zamykanie = false;
 
-                audioDrzwi.PlayDelayed(DELAY);
+        if (lock1 == null ||lock1.unlocked == true) {
+                if (Otwieranie == false) {
+                    animator.SetBool("Otwierane", true);
+                    animator.SetBool("Zamykane", false);
+                    Otwieranie = true;
+                    Zamykanie = false;
+
+                    audioDrzwi.PlayDelayed(DELAY);
 
 
-            } else
-            {
-                animator.SetBool("Otwierane", false);
-                animator.SetBool("Zamykane", true);
-                Zamykanie = true;
-                Otwieranie = false;
+                } else
+                {
+                    animator.SetBool("Otwierane", false);
+                    animator.SetBool("Zamykane", true);
+                    Zamykanie = true;
+                    Otwieranie = false;
 
-                audioDrzwi.PlayDelayed(DELAY);
+                    audioDrzwi.PlayDelayed(DELAY);
 
 
             }
@@ -59,46 +52,6 @@ public class Drzwi : NetworkBehaviour, Interactable
             return true;
         }
         return false;
-        
-    }
-    
-    [ServerRpc(RequireOwnership = false)]
-    public void DoorInteractionServerRpc() {
-        DoorInteractionClientRpc();
-    
-    }
-    [ClientRpc]
-    public void DoorInteractionClientRpc() {
-
-        if (lock1 == null || lock1.unlocked == true)
-        {
-            if (Otwieranie == false)
-            {
-                animator.SetBool("Otwierane", true);
-                animator.SetBool("Zamykane", false);
-                Otwieranie = true;
-                Zamykanie = false;
-
-                audioDrzwi.PlayDelayed(DELAY);
-
-
-            }
-            else
-            {
-                animator.SetBool("Otwierane", false);
-                animator.SetBool("Zamykane", true);
-                Zamykanie = true;
-                Otwieranie = false;
-
-                audioDrzwi.PlayDelayed(DELAY);
-
-
-            }
-
-           // return true;
         }
-       // return false;
+   
     }
-    
-    
-}

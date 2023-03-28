@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 
-public class Swapable : NetworkBehaviour, Interactable
+public class Swapable : MonoBehaviour, Interactable
 {
     [SerializeField] private string _prompt;
     [SerializeField] private GameObject waypoint;
@@ -16,7 +15,7 @@ public class Swapable : NetworkBehaviour, Interactable
 
     public string InteractionPrompt => _prompt;
 
-    public override void OnNetworkSpawn()
+    void Start()
     {
         state = 0;
         x = GetComponent<Transform>().position.x;
@@ -27,20 +26,7 @@ public class Swapable : NetworkBehaviour, Interactable
     }
     public bool Interact(Interactor interactor)
     {
-        SwapInteractionServerRpc();
-        return true;
         zmieniam = true;
         return true;
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void SwapInteractionServerRpc()
-    {
-        SwapInteractionClientRpc();
-
-    }
-    [ClientRpc]
-    public void SwapInteractionClientRpc()
-    {
-        zmieniam = true;
     }
 }

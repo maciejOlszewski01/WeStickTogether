@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class Interactor : NetworkBehaviour
+public class Interactor : MonoBehaviour
 {
 
 
@@ -59,18 +58,15 @@ public class Interactor : NetworkBehaviour
                 }
                 else if (Keyboard.current.eKey.wasPressedThisFrame)
                 {
-                    //interakcjaServerRpc(_coliders[0]);
-                    
                     interactable.Interact(this);
                     //do przeobienia chyba
-                    /*
                     if (_coliders[0].GetComponent<Swapable>() != null)
                     {
                         //Debug.Log("Widze obiekty");
                         objectsToSwap[objectsReadytoSwap] = _coliders[0].gameObject;
                         objectsReadytoSwap++;
-                    }*/
-                    if (Keyboard.current.eKey.wasPressedThisFrame)
+                    }
+                    else if (Keyboard.current.eKey.wasPressedThisFrame)
                     {
                         //do przeobienia chyba
                         if (_coliders[0].GetComponent<Note>() != null)
@@ -91,7 +87,7 @@ public class Interactor : NetworkBehaviour
             if (objectsToSwap[0] != null && objectsToSwap[1] != null)
             {
 
-               /* bool zrobione = Swap(objectsToSwap[0], objectsToSwap[1]);
+                bool zrobione = Swap(objectsToSwap[0], objectsToSwap[1]);
 
 
                 if (zrobione == true)
@@ -102,7 +98,7 @@ public class Interactor : NetworkBehaviour
                     objectsToSwap[1] = null;
                     objectsReadytoSwap = 0;
                 }
-               */
+
             }
         }
         else
@@ -115,7 +111,7 @@ public class Interactor : NetworkBehaviour
             }
         }
     }
-    /*
+
     private bool Swap(GameObject first, GameObject second)
     {
         int speed = 1;
@@ -195,17 +191,6 @@ public class Interactor : NetworkBehaviour
             }
         }
         return false;
-    }*/
-    /*
-    [ServerRpc(RequireOwnership = false)]
-    public void interakcjaServerRpc(Collider interactable)
-    {
-        interakcjaClientRpc(interactable);
     }
-    [ClientRpc]
-    public void interakcjaClientRpc(Collider interactable)
-    {
-        interactable.GetComponent<Interactable>().Interact(this);
-    }
-    */
+
 }
