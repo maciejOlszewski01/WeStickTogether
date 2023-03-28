@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Lock : MonoBehaviour, Interactable
+public class Lock : NetworkBehaviour, Interactable
 {
 
 
@@ -14,14 +15,29 @@ public class Lock : MonoBehaviour, Interactable
 
     public bool Interact(Interactor interactor)
     {
+        
+        
+
         if (interactor.hasKey == true)
         {
-            unlocked = true;
+            LockInteractionServerRpc();
         }
         return true;
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void LockInteractionServerRpc()
+    {
+        LockInteractionClientRpc();
 
+    }
+    [ClientRpc]
+    public void LockInteractionClientRpc()
+    {
 
-}
+            unlocked = true;
+        
+        //return true;
+    }
+    }
 

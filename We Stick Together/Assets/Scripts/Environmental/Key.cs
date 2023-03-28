@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Key : MonoBehaviour , Interactable , Pickable
+public class Key : NetworkBehaviour, Interactable , Pickable
 {
     [SerializeField] private string _prompt;
     //Wydaje mi siê ¿e mo¿na przypisaæ klucz do danego zamka tworz¹c to i w iteratorze tablice obiektów pickable
@@ -11,16 +12,13 @@ public class Key : MonoBehaviour , Interactable , Pickable
 
     public string InteractionPrompt => _prompt;
 
-
-    void Start()
-    {
-       
-    }
     public bool Interact(Interactor interactor)
     {
-        interactor.hasKey = true;
 
-        Deactivate();
+        interactor.hasKey = true;
+        KeyInteractionServerRpc();
+
+
         return true;
     }
 
@@ -28,6 +26,18 @@ public class Key : MonoBehaviour , Interactable , Pickable
     {
         gameObject.SetActive(false);
         return true;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void KeyInteractionServerRpc()
+    {
+        KeyInteractionClientRpc();
+
+    }
+    [ClientRpc]
+    public void KeyInteractionClientRpc()
+    {
+        Deactivate();
     }
 
 }
