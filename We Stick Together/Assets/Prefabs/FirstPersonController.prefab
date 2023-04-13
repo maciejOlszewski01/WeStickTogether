@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 955533588810633670}
   - component: {fileID: 5112233011939944845}
   - component: {fileID: 5239138887549225166}
+  - component: {fileID: -2486966278195770682}
   m_Layer: 7
   m_Name: FirstPersonController
   m_TagString: Untagged
@@ -117,7 +118,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3474804305102012693}
   - {fileID: 2731774201388167473}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   crouchHeight: 1
   standingHeight: 2
   timeToCrouch: 0.25
-  crouchingCenter: {x: 0, y: 0.5, z: 0}
+  crouchingCenter: {x: 0, y: 0, z: 0}
   standingCenter: {x: 0, y: 0, z: 0}
   walkBobSpeed: 14
   walkBobAmount: 0.05
@@ -256,6 +256,20 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!114 &-2486966278195770682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3474804304214363940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7f19db1fd9f5c48aca9397db954f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  HowClose: 20
 --- !u!1 &3474804305102012688
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,8 +303,8 @@ Transform:
   m_Children:
   - {fileID: 2108364114730819489}
   - {fileID: 1762177391998455057}
-  m_Father: {fileID: 3474804304214363945}
-  m_RootOrder: 0
+  m_Father: {fileID: 2731774201388167473}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3474804305102012690
 Camera:
@@ -427,7 +441,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6de134690468d0247a96e84f43ba81c7, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6de134690468d0247a96e84f43ba81c7, type: 3}
       propertyPath: m_LocalPosition.x
