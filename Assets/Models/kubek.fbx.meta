@@ -3,7 +3,12 @@ guid: 069526162a87ace43b0b6b764b821de2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Watermelon
+    second: {fileID: 2100000, guid: 05b87722517810e4cbdfa23ebd9e0d13, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
