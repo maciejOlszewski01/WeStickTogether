@@ -9,11 +9,27 @@ public class LightSwitch : MonoBehaviour, Interactable,HoldingInteractable
     private bool change = false;
     public string InteractionPrompt => _prompt;
 
+    public bool stateChange => false;
+
     public bool Interact(Interactor interactor)
     {
         foreach(Light l in swiatla)
         {
             l.range = 5;
+        }
+        change= true;
+        return true;
+    }
+
+    public bool NotInteracting(Interactor interactor)
+    {
+        if(change = true)
+        {
+            foreach(Light l in swiatla)
+            {
+                l.range = 0;
+            }
+            change= false;
         }
         return true;
     }

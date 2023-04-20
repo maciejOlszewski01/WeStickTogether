@@ -17,16 +17,16 @@ public class Interactor : NetworkBehaviour
     //czy ma klucz
     public bool hasKey;
     private readonly Collider[] _coliders = new Collider[3];
-    private GameObject[] objectsToSwap = new GameObject[2];
+    private GameObject HoldInteractable;
     private int _numFound;
     public Note ActiveCanvas = null;
-    private int objectsReadytoSwap;
+
     private Interactable interactable;
 
 
     void Start()
     {
-        objectsReadytoSwap = 0;
+        
     }
 
     // Update is called once per frame
@@ -49,13 +49,30 @@ public class Interactor : NetworkBehaviour
                     if (!interactionPrompt.IsDisplayed) interactionPrompt.SetUp(interactable.InteractionPrompt);
                 }
 
-                if (_coliders[0].GetComponent<MovableHeavy>() != null)
+                if ( _coliders[0].GetComponent<HoldingInteractable>() != null)
                 {
+
                     if (Keyboard.current.eKey.isPressed)
                     {
                         interactable.Interact(this);
+                        HoldInteractable = _coliders[0].gameObject;
 
                     }
+                    else
+                    {
+                        _coliders[0].GetComponent<HoldingInteractable>().NotInteracting(this);
+                        HoldInteractable = null;
+                    }
+                }
+                else if (_coliders[0].GetComponent<MovableHeavy>() != null )
+                {
+                    
+                    if (Keyboard.current.eKey.isPressed)
+                    {
+                        interactable.Interact(this);
+                     
+                    }
+
                 }
                 else if (Keyboard.current.eKey.wasPressedThisFrame)
                 {
@@ -87,23 +104,14 @@ public class Interactor : NetworkBehaviour
             {
                 if (interactable != null) interactable = null;
                 if (interactionPrompt.IsDisplayed) interactionPrompt.Close();
-            }
-            if (objectsToSwap[0] != null && objectsToSwap[1] != null)
-            {
-
-               /* bool zrobione = Swap(objectsToSwap[0], objectsToSwap[1]);
-
-
-                if (zrobione == true)
-
+                if (HoldInteractable != null)
                 {
-
-                    objectsToSwap[0] = null;
-                    objectsToSwap[1] = null;
-                    objectsReadytoSwap = 0;
+                    HoldInteractable.GetComponent<HoldingInteractable>().NotInteracting(this);
+                    HoldInteractable = null;
                 }
-               */
             }
+            
+
         }
         else
         {
