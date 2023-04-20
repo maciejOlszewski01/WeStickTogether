@@ -6197,6 +6197,8 @@ MonoBehaviour:
   _prompt: Zapal
   swiatla:
   - {fileID: 2061725192}
+  doWylaczenia:
+  - {fileID: 1560153418}
 --- !u!65 &1484789473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6535,6 +6537,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b48fccdcac567d4a89cebcf5502025a, type: 3}
+--- !u!1 &1560153418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8789569504547569763, guid: 846903f017df26f49a826595ec97b089, type: 3}
+  m_PrefabInstance: {fileID: 1590001709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1560850293
 PrefabInstance:
   m_ObjectHideFlags: 0
