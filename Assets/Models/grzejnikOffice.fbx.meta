@@ -22,8 +22,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Rough Plastic
-    second: {fileID: 2100000, guid: 5a70b939f58c8314282c7da313becdb2, type: 2}
+      name: Old white plastic
+    second: {fileID: 2100000, guid: 44082112ddb03424b92227e36f39f168, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
