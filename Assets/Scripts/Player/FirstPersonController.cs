@@ -41,7 +41,7 @@ public class FirstPersonController : NetworkBehaviour
     [SerializeField] private float crouchHeight = 0.5f;
     [SerializeField] private float standingHeight = 2f;
     [SerializeField] private float timeToCrouch = 0.25f;
-    [SerializeField] private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
+    private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
     [SerializeField] private Vector3 standingCenter = new Vector3(0, 0, 0);
     private bool isCrouching;
     private bool duringCrouchAnimation;
@@ -74,6 +74,7 @@ public class FirstPersonController : NetworkBehaviour
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
+        crouchingCenter = new Vector3(standingCenter.x, crouchHeight / 2, standingCenter.x);
     }
 
     void Update()
@@ -153,11 +154,14 @@ public class FirstPersonController : NetworkBehaviour
 
     private IEnumerator CrouchStand()
     {
-        if (isCrouching && Physics.Raycast(playerCamera.transform.position, Vector3.up, 1f))
+        if (isCrouching && Physics.Raycast(playerCamera.transform.position, Vector3.up, 0.1f))
             yield break;
 
         duringCrouchAnimation = true;
 
+        canUseHeadbob = false;
+        canSprint = !canSprint;
+        
         float timeElapsed = 0;
         float targetHeight = isCrouching ? standingHeight : crouchHeight;
         float currentHeight = characterController.height;
@@ -166,15 +170,18 @@ public class FirstPersonController : NetworkBehaviour
 
         while (timeElapsed < timeToCrouch)
         {
-            characterController.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed/timeToCrouch);
-            characterController.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed/timeToCrouch);
+            characterController.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
+            float tempy = Mathf.Lerp(playerCamera.transform.localPosition.y, targetHeight, 3 * Time.deltaTime) ;
+            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, tempy, playerCamera.transform.localPosition.z);
+            characterController.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
+            defaultYPos = characterController.height;
             timeElapsed += Time.deltaTime;
             yield return null;
         }
 
         characterController.height = targetHeight;
         characterController.center = targetCenter;
-
+        canUseHeadbob = true;
         isCrouching = !isCrouching;
 
         duringCrouchAnimation = false;

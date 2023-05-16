@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StartDecision : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
 
         if (NetworkManagerUI.flagH == 1)
